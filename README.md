@@ -1,5 +1,5 @@
 # Altruistiq hiring assessment
-Welcome to Altruistiq!🙏
+Welcome to Altruistiq!🙏 to run backend please follow these steps:
 
 ### Install
 Clone this repo, then
