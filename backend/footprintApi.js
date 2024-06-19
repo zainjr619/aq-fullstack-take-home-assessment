@@ -15,7 +15,6 @@ export default {
 
   // fetch all countries
   async getCountries() {
-   console.log("----->",process.env.API_KEY)
     const resp = await this.get('https://api.footprintnetwork.org/v1/countries')
     return resp.data
   },
@@ -24,5 +23,11 @@ export default {
   async getDataForCountry(countryCode) {
     const resp = await this.get(`https://api.footprintnetwork.org/v1/data/${countryCode}/all/EFCpc`)
     return resp.data
-  }  
+  },
+
+  // fetch a single country by countryCode
+  async getDataForYear(year) {
+    const resp = await this.get(`https://api.footprintnetwork.org/v1/data/all/${+year}`)
+    return resp.data
+  }
 }
