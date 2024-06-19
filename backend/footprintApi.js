@@ -25,7 +25,7 @@ export default {
     return resp.data
   },
 
-  // fetch a single country by countryCode
+  // fetch records by year
   async getDataForYear(year) {
     const resp = await this.get(`https://api.footprintnetwork.org/v1/data/all/${+year}`)
     return resp.data

@@ -13,9 +13,17 @@ app.get('/', async (req, res) => {
   const currentPage = parseInt(req.query.page) || 1;
 
   try {
+    const year = req.query.year;
+    // validation for year
+    if(!year){
+      return res.status(400).json({ error: 'year is not provided' , status: 400});
+    }
     // Fetch data from your API for a specific year
     const countryYearData = await footprintApi.getDataForYear(req.query.year);
-
+    if(countryYearData.length === 0){
+      return res.status(500).json({ error: 'Internal server error' , status: 500});
+    }
+    
     // Filter the data based on "record" field
     const filteredArray = countryYearData.filter(obj => obj.record === "EFConsPerCap");
 
@@ -26,7 +34,6 @@ app.get('/', async (req, res) => {
 
     // Prepare metadata for pagination
     const totalPages = Math.ceil(filteredArray.length / PAGE_SIZE);
-
     // Send the response
    return res.json({
       data: paginatedData,
@@ -37,7 +44,7 @@ app.get('/', async (req, res) => {
 
   } catch (error) {
     console.error('Error fetching or filtering data:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error' , status: 500});
   }
 });
 app.listen(5000,() => {     
