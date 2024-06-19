@@ -6,48 +6,40 @@ const app = express()
 
 app.use(bodyParser.json())
 
-app.get('/', async (req, res) => {    
-  console.log("enter")
-  const countries = await footprintApi.getCountries()
-  const country = await footprintApi.getDataForCountry(229)
+const PAGE_SIZE = 10; // Number of records to send per page
 
-  res.send(`
-    <center>
-      <h1>Welcome to Altruistiq!</h1>
-      <div style="display: flex; flex-direction: row;">
-        <div style="width: 50%; margin-right: 20px;">    
-          <h3>Example countries JSON (first 5 results)</h3> 
-          <pre style="  
-            text-align: left;
-            background: #f8f8f8;
-            border: 1px solid #efefef;
-            border-radius: 6px;
-            padding: 2em;"
-          >${JSON.stringify(countries?.slice(0, 5), null, 2)}</pre>
-        </div>
-        <div style="width: 50%;">    
-          <h3>Example country JSON (first 5 years)</h3>
-          <pre style="  
-            text-align: left;
-            background: #f8f8f8;
-            border: 1px solid #efefef;
-            border-radius: 6px;
-            padding: 2em;"
-          >${JSON.stringify(country?.slice(0, 5), null, 2)}</pre>
-        </div>
-      </div>
-    </center>    
-  `)
-  return
+// Endpoint for fetching data with pagination
+app.get('/', async (req, res) => {
+  const currentPage = parseInt(req.query.page) || 1;
 
+  try {
+    // Fetch data from your API for a specific year
+    const countryYearData = await footprintApi.getDataForYear(req.query.year);
 
-  // console.log('showing first 5 countries:')
-  // console.log(countries.slice(0, 5))
-  // console.log('showing first 5 years of a country:')
-  // console.log(country.slice(0, 5))
-  return res.send({countries,country})
-})
+    // Filter the data based on "record" field
+    const filteredArray = countryYearData.filter(obj => obj.record === "EFConsPerCap");
 
+    // Calculate pagination boundaries
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    const endIndex = startIndex + PAGE_SIZE;
+    const paginatedData = filteredArray.slice(startIndex, endIndex);
+
+    // Prepare metadata for pagination
+    const totalPages = Math.ceil(filteredArray.length / PAGE_SIZE);
+
+    // Send the response
+   return res.json({
+      data: paginatedData,
+      currentPage: currentPage,
+      totalPages: totalPages,
+      totalRecords: filteredArray.length
+    });
+
+  } catch (error) {
+    console.error('Error fetching or filtering data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 app.listen(5000,() => {     
   console.log('app is listening on port 5000')
 })
