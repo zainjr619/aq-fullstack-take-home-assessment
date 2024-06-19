@@ -6,7 +6,7 @@
   "scripts": {
     "init": "node ./scripts/generateData.js",
     "start": "source .env && nodemon index --exec \"node -r @babel/register\"",
-    "test": "mocha --watch --watch-files **/*.js,tests/*.js --exit --require @babel/polyfill --require @babel/register tests/"
+    "test": "jest"
   },
   "author": "Satya van Heummen",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "@babel/preset-env": "^7.24.7",
     "@babel/register": "^7.23.7",
     "@faker-js/faker": "*",
-    "mocha": "^10.4.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.3"
   }
 }
