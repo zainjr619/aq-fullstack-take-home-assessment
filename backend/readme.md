@@ -3,6 +3,7 @@ Welcome to Altruistiq!🙏 to run backend please follow these steps:
 
 ### Install
 Clone this repo, then
+then navigate to the folder backend in terminal
 ```bash
 npm i
 ```
