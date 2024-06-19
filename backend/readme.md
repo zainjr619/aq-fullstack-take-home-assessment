@@ -1,4 +1,4 @@
-# Altruistiq hiring assessment
+# Altruistiq assessment
 Welcome to Altruistiq!🙏 to run backend please follow these steps:
 
 ### Install
