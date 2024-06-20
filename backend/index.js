@@ -26,6 +26,7 @@ app.get('/', async (req, res) => {
     
     // Filter the data based on "record" field
     const filteredArray = countryYearData.filter(obj => obj.record === "EFConsPerCap");
+    const totalCarbon = filteredArray.reduce((sum, item) => sum + item.carbon, 0);
 
     // Calculate pagination boundaries
     const startIndex = (currentPage - 1) * PAGE_SIZE;
@@ -39,7 +40,8 @@ app.get('/', async (req, res) => {
       data: paginatedData,
       currentPage: currentPage,
       totalPages: totalPages,
-      totalRecords: filteredArray.length
+      totalRecords: filteredArray.length,
+      totalCarbon: totalCarbon.toFixed(2),
     });
 
   } catch (error) {

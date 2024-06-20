@@ -4,6 +4,8 @@ import footprintApi from "../footprintApi";
 import express from "express";
 const app = express();
 
+jest.mock('../footprintApi');
+
 describe("GET /", () => {
   // Test case for successful data retrieval and pagination
   it('should fetch and paginate data correctly', async () => {
@@ -18,7 +20,7 @@ describe("GET /", () => {
      const getDataForYearSpy = jest.spyOn(footprintApi, 'getDataForYear');
      getDataForYearSpy.mockResolvedValueOnce(mockData);
 
-    const response = await axios.get('http://127.0.0.1:5000/?page=1&year=2000'); // Adjust the query parameters as necessary
+    const response = await axios.get('http://127.0.0.1:5000/?page=1&year=2000'); 
 
     expect(response.status).toBe(200);
   });
@@ -32,6 +34,12 @@ describe("GET /", () => {
     const response = await request(app).get("/");
 
     expect(response.status).toBe(404); // Expecting a 404 status code for bad request
+  });
+
+  it('should return 500 if data is empty', async () => {
+    const getDataForYearSpy = jest.spyOn(footprintApi, 'getDataForYear').mockResolvedValueOnce([]);
+    const response = await request(app).get('/').query({ year: '2025' });
+    expect(response.status).toBe(404);
   });
 
   // Test case for default pagination behavior (page 1 if no page param)
