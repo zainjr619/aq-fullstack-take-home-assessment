@@ -1,10 +1,17 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import footprintApi from './footprintApi'
+const cors = require('cors');
 
 const app = express()
 
 app.use(bodyParser.json())
+const corsOptions = {
+  origin: '*', // Replace with your allowed origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+};
+
+app.use(cors(corsOptions));
 
 const PAGE_SIZE = 10; // Number of records to send per page
 

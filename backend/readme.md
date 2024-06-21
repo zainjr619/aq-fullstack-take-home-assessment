@@ -15,7 +15,7 @@ Code automatically reloads upon code changes.
 The backend runs on port 5000, go to `http://localhost:5000/` to 
 
 ```bash
-npm start
+npm run dev 
 ```
 
 ### Run tests
