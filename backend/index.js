@@ -34,6 +34,8 @@ app.get('/', async (req, res) => {
     // Filter the data based on "record" field
     const filteredArray = countryYearData.filter(obj => obj.record === "EFConsPerCap");
     const totalCarbon = filteredArray.reduce((sum, item) => sum + item.carbon, 0);
+    // sort the array on the basis of carbon value
+    filteredArray.sort((a, b) => b.carbon - a.carbon);
 
     // Calculate pagination boundaries
     const startIndex = (currentPage - 1) * PAGE_SIZE;
