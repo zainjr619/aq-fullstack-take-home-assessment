@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f4f4f4;
+}
+
+.App {
+  font-family: Inter, sans-serif;
+  text-align: center;
+}
+
+.heading {
+  font-size: 48px;
+}
+
+.f-700 {
+  font-weight: 700;
+}
+
+.chart {
+  width: 60%;
+  margin: auto;
+  text-align: left;
+}
+
+.chart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+  gap: 60px;
+}
+.chart-bar-container {
+  flex: 1;
+  margin: 0 10px;
+}
+.chart-label {
+  width: 30%;
+  text-align: right;
+  font-size: 16px;
+  padding-right: 10px;
+}
+
+.chart-field {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.chart-bar {
+  background-color: #66b3ff;
+  height: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.chart-value {
+  padding-right: 5px;
+  color: #000;
+  font-size: 16px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-btn {
+  background-color: #41565a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-btn:disabled {
+  background-color: #acc2c7;
+  cursor: not-allowed;
+}
+
+.pagination-btn:not(:disabled):hover {
+  background-color: #5f787d;
+}
+
+.pagination span {
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.align-end {
+  align-self: end;
+}
+
+.chart-metadata {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 50px 0px;
+}
+
+.chart-metadata-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.chart-metadata select,
+.chart-metadata-value {
+  margin-top: 5px;
+  font-size: 56px;
+  border: 0;
+  background: none;
+  color: rgba(15, 111, 111, 1);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.chart-metadata select::-ms-expand {
+  display: none;
+}
+
+.chart-metadata select:focus-visible {
+  outline: none;
+}
+
+/* Custom arrow using pseudo-element */
+.chart-metadata .custom-select-wrapper {
+  position: relative;
+}
+
+.chart-metadata .custom-select-wrapper::after {
+  content: "▼";
+  font-size: 20px;
+  color: rgba(15, 111, 111, 1);
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.chart-metadata select option {
+  font-size: 16px; /* Dropdown options size */
+  color: initial; /* Dropdown options color */
+}
+
+.chart-metadata-label {
+  font-size: 24px;
+  font-weight: 300;
+  color: rgba(128, 128, 128, 1);
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.g-30 {
+  gap: 30px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.chart-graph {
+  padding: 70px 60px;
+  background: #fff;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  z-index: 10;
+}

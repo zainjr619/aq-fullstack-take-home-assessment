@@ -1,24 +1,22 @@
-# Altruistiq hiring assessment
-Welcome to Altruistiq!🙏 to run backend please follow these steps:
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+# Altruistiq assessment
+Welcome to Altruistiq!🙏 to run frontend please follow these steps:
 
 ### Install
 Clone this repo, then
+then navigate to the folder frontend in terminal
 ```bash
 npm i
-```
-
-in `.env` copy over the secret that you've received from us.
-
-### Run
-Code automatically reloads upon code changes. 
-The backend runs on port 5000, go to `http://localhost:5000/` to 
+``` 
 
 ```bash
-npm start
-```
-
-### Run tests
-To run test the backend needs to be running (code and tests are being watched so automatically reruns).
-```
-npm test
+npm run dev 
 ```
