@@ -1,20 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+// get api data from backend
 const getChartData = async (currentPage, year) => {
   const response = await axios
     .get(`http://localhost:5000/?page=${currentPage}&year=${year}`)
     .then((response) => response.data);
-  console.log(response)
   return response;
 };
 
-
+// adjust color of chart
 export const getColor = (index, total) => {
   const step = 100 / total;
   const colorValue = Math.round(step * (index + 1));
   return `rgba(65, 86, 90, ${colorValue / 100})`;
 };
-
+// manage states
 const useBarChart = () => {
   const [data, setData] = useState([]);
   const [year, setYear] = useState(2020);
@@ -23,12 +23,14 @@ const useBarChart = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  // check carbon is greater than 0 for graph style
   const filteredItems = useMemo(
-    () => data?.filter((item) => item?.value && item?.value > 0),
+    () => data?.filter((item) => item?.carbon && item?.carbon > 0),
     [data]
   );
+  // get percentage to apply as width of div
   const maxValue = useMemo(
-    () => Math.ceil(Math.max(...filteredItems.map((item) => item.value))),
+    () => Math.ceil(Math.max(...filteredItems.map((item) => item.carbon))),
     [filteredItems]
   );
 
@@ -52,7 +54,7 @@ const useBarChart = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-
+// return data to components
   return {
     data,
     pagination,
